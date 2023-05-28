@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Encriptador-Desencriptador</h1>
+        <h2>De una galaxia muy muy lejana</h2>
+    </header>
+    <main>
+        <section>
+            <textarea class="text-area" id="text-area"  cols="30" rows="10" placeholder="Ingrese el texto aqui"></textarea>
+            <div>
+                <h6 class="informacion">Solo letras minusculas y sin acentos</h6>
+            </div>
+            <div class="botones">
+                <button class="boton-encriptar" id="boton-encriptar">Encriptar</button>
+                <button class="boton-desencriptar" id="boton-desencriptar">Desencriptar</button>
+            </div>
+        </section>
+        <section>
+            <textarea class="mensaje" id = 'mensaje' cols="30" rows="10" placeholder="Resultado"></textarea>
+            <div class="botones" id="botones">
+                <button class="copiar" id="copiar">Copiar</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <h1 id="footer-datos">Brandon García Ruiz</h1>
+    </footer>
+    
+</body>
+
+<script>
+
+var input2 = document.getElementById("mensaje");
+    var btnencriptar = document.getElementById("boton-encriptar");
+    var btncopiar = document.getElementById ('copiar');
+    var btndesencriptar = document.getElementById("boton-desencriptar"); 
+
+    // Ejemplo de uso
+    btnencriptar.onclick = encriptar;
+    btncopiar.onclick = copiar;
+    btndesencriptar.onclick = desencriptar;
+
+
+
+// Función para encriptar una cadena
+
+    function copiar (){
+        var input2 = document.getElementById("mensaje");
+        var copiar = input2.value;
+        navigator.clipboard.writeText(copiar);
+    }
+
+
+  function encriptar() {
+      var input = document.getElementById("text-area");
+      var cadena = input.value;
+      var encriptada = "";
+      for (var i = 0; i < cadena.length; i++) {
+        var charCode = cadena.charCodeAt(i);
+        if (charCode >= 97 && charCode <= 122) {
+          // Letra minúscula
+          var letra = String.fromCharCode(charCode);/* Transforma de el codigo unicode a un string */
+          switch (letra) {
+            case "e":
+              encriptada += "enter";
+              break;
+            case "i":
+              encriptada += "imes";
+              break;
+            case "a":
+              encriptada += "ai";
+              break;
+            case "o":
+              encriptada += "ober";
+              break;
+            case "u":
+              encriptada += "ufat";
+              break;
+            default:
+              encriptada += letra;
+          }
+        } 
+        else if (charCode >= 65 && charCode <= 90) {
+          // Letra mayúscula
+          if (charCode >= 65 && charCode <= 90){
+            alert ('NO SE ADMITEN MAYUSCULAS'); /* Esto es para evitar que metan letras mayusculas */
+            break;
+          }
+          var letra = String.fromCharCode(charCode).toLowerCase();
+          switch (letra) {
+            case "e":
+              encriptada += "enter".toUpperCase();
+              break;
+            case "i":
+              encriptada += "imes".toUpperCase();
+              break;
+            case "a":
+              encriptada += "ai".toUpperCase();
+              break;
+            case "o":
+              encriptada += "ober".toUpperCase();
+              break;
+            case "u":
+              encriptada += "ufat".toUpperCase();
+              break;
+            default:
+              encriptada += letra.toUpperCase();
+          }
+        } else {
+          // Otros caracteres no alfabéticos
+          encriptada += cadena.charAt(i);
+        }
+      }
+      console.log(encriptada);
+      input2.value = encriptada;
+    }
+    
+    // Función para desencriptar una cadena
+    function desencriptar() {
+    var input = document.getElementById("text-area");
+    var cadena = input.value;
+  var desencriptada = "";
+  var i = 0;
+  while (i < cadena.length) {
+    var letra = cadena.charAt(i);/* El charCodeAt() método devuelve un número indicando el valor Unicode del carácter en el índice proporcionado. */
+    switch (letra) {
+      case "e":
+        if (cadena.substring(i, i + 5) === "enter") {
+          desencriptada += "e";
+          i += 5;
+        } else {
+          desencriptada += letra;
+          i++;
+        }
+        break;
+      case "i":
+        if (cadena.substring(i, i + 4) === "imes") {/* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring */
+          desencriptada += "i";
+          i += 4;
+        } else {
+          desencriptada += letra;
+          i++;
+        }
+        break;
+      case "a":
+        if (cadena.substring(i, i + 2) === "ai") {
+          desencriptada += "a";
+          i += 2;
+        } else {
+          desencriptada += letra;
+          i++;
+        }
+        break;
+      case "o":
+        if (cadena.substring(i, i + 4) === "ober") {
+          desencriptada += "o";
+          i += 4;
+        } else {
+          desencriptada += letra;
+          i++;
+        }
+        break;
+      case "u":
+        if (cadena.substring(i, i + 4) === "ufat") {
+          desencriptada += "u";
+          i += 4;
+        } else {
+          desencriptada += letra;
+          i++;
+        }
+        break;
+      default:
+        desencriptada += letra;
+        i++;
+    }
+  }
+  input2.value = desencriptada;
+}
+
+
+</script>
+
+</html>
+
